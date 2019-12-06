@@ -34,11 +34,49 @@ export class Game {
                 score: null
             }],])
 
-        this.currentFrame = 0
+        this.currentFrame = 0;
+        this.currentFrameRoll = 0;
     }
 
-    roll(pins) {
-        return;
+    roll(nbPins) {
+        if (!Number.isInteger(nbPins) || nbPins < 0 || nbPins > 10) {
+            throw new Error("Invalid number of pins")
+        }
+
+        const currentFrameValue = this.frames.get(this.currentFrame);
+        let nextFrameValue = {};
+
+        if (nbPins === 10) {
+            nextFrameValue = {
+                ...currentFrameValue,
+                rolls: [10, null],
+            }
+
+            this.frames.set(this.currentFrame, nextFrameValue)
+            this.currentFrame++
+            this.currentFrameRoll = 0
+        } else {
+            if (this.currentFrameRoll === 0) {
+                nextFrameValue = {
+                    ...currentFrameValue,
+                    rolls: [nbPins, null]
+                }
+
+                this.frames.set(this.currentFrame, nextFrameValue)
+
+                this.currentFrameRoll++
+            } else {
+                nextFrameValue = {
+                    ...currentFrameValue,
+                    rolls: [currentFrameValue.rolls[0], nbPins]
+                }
+
+                this.frames.set(this.currentFrame, nextFrameValue)
+
+                this.currentFrame++
+                this.currentFrameRoll = 0
+            }
+        }
     }
 
     score() {
@@ -46,6 +84,15 @@ export class Game {
     }
 
     debug() {
+        this.roll(4)
+        this.roll(4)
+        this.roll(6)
+        this.roll(4)
+        this.roll(8)
+        this.roll(8)
+
         console.log(this.frames)
+        // console.log(this.currentFrame);
+
     }
 }

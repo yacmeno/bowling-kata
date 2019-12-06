@@ -7,6 +7,12 @@ afterAll(() => {
     return
 });
 
+test('Should throw error on invalid pin number', () => {
+    const game = new Game();
+    expect(() => {
+        game.roll('octopus');
+    }).toThrow();
+});
 test('Should handle last roll spare', () => {
 
 });
@@ -25,6 +31,7 @@ test('Should handle all spare game', () => {
 test('Should handle game with normal frames, spares and strikes', () => {
 
 });
+
 test('debug', () => {
     const game = new Game();
     game.debug()
