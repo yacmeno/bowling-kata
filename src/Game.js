@@ -12,10 +12,23 @@ export class Game {
     }
 
     score() {
-        let totalScore = 0
+        let totalScore = 0;
+        let rollIndex = 0
 
-        this.rolls.forEach(pins => totalScore += pins)
+        for (let frameIndex = 0; frameIndex < 10; frameIndex++) {
+            const isSpare = this.rolls[rollIndex] + this.rolls[rollIndex + 1] === 10 ? true : false
+
+            if (isSpare) {
+                totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
+                rollIndex += 2
+            } else {
+                totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1]
+                rollIndex += 2
+            }
+        }
+
         
         return totalScore;
     }
+
 }

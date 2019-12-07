@@ -31,18 +31,27 @@ test('Should handle all 1s (no spare no strike)', () => {
     expect(game.score()).toBe(20)
 });
 
-// test('Should handle last roll spare', () => {
+test('Should handle spare', () => {
+    const game = new Game();
+    
+    // roll spare on first frame
+    // roll no spare no strike on second frame
+    game.roll(5)
+    game.roll(5)
+    game.roll(5);
+    rollMany(game, 17, 0)
 
-// });
-// test('Should handle last roll strike', () => {
+    expect(game.score()).toBe(20)
+});
+
+
+// test('Should handle strike', () => {
 
 // });
 // test('Should handle all strikes game', () => {
 
 // });
-// test('Should handle all spare game', () => {
 
-// });
 // test('Should handle game with normal frames, spares and strikes', () => {
 
 // });
