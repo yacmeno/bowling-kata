@@ -17,10 +17,14 @@ export class Game {
 
         for (let frameIndex = 0; frameIndex < 10; frameIndex++) {
             const isSpare = this.rolls[rollIndex] + this.rolls[rollIndex + 1] === 10 ? true : false
+            const isStrike = this.rolls[rollIndex] === 10 ? true : false
 
             if (isSpare) {
                 totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
                 rollIndex += 2
+            } else if (isStrike) {
+                totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2]
+                rollIndex++
             } else {
                 totalScore += this.rolls[rollIndex] + this.rolls[rollIndex + 1]
                 rollIndex += 2

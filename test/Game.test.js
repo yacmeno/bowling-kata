@@ -44,14 +44,21 @@ test('Should handle spare', () => {
     expect(game.score()).toBe(20)
 });
 
+test('Should handle strike', () => {
+    const game = new Game()
 
-// test('Should handle strike', () => {
+    game.roll(10)
+    game.roll(5)
+    game.roll(2)
+    rollMany(game, 17, 0)
 
-// });
-// test('Should handle all strikes game', () => {
+    expect(game.score()).toBe(24)
+});
 
-// });
+test('Should handle all strikes game', () => {
+    const game = new Game()
 
-// test('Should handle game with normal frames, spares and strikes', () => {
+    rollMany(game, 13, 10)
 
-// });
+    expect(game.score()).toBe(300)
+});
